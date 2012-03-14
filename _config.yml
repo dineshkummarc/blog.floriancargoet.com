@@ -2,7 +2,7 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://tech.floriancargoet.com
+url: http://blog.floriancargoet.com
 title: /home/florian
 subtitle: Florian Cargoët's tech blog
 author: Florian Cargoët
@@ -89,7 +89,7 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name: techfloriancargoet
+disqus_short_name: blogfloriancargoetcom
 disqus_show_comment_count: true
 
 # Google Analytics
