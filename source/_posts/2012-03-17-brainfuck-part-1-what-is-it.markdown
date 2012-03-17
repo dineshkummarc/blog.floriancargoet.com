@@ -115,7 +115,7 @@ Write the brainfuck equivalent of:
 Conclusion
 ----------
 
-Brainfuck is well chosen name.
+Brainfuck is a well chosen name.
 
 ---
 
