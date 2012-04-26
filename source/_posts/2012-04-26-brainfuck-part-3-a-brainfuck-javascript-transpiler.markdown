@@ -280,3 +280,55 @@ This article is part of a series on brainfuck, a weird programming language:
  1. [Brainfuck part 1: what is it?](/2012/03/brainfuck-part-1-what-is-it/)
  2. [Brainfuck part 2: an interpreter in JavaScript](/2012/03/brainfuck-part-2-an-interpreter-in-javascript/)
  3. [Brainfuck part 3: a brainfuck → JavaScript transpiler](/2012/04/brainfuck-part-3-a-brainfuck-javascript-transpiler/)
+
+<script>
+var bf = function(code){
+    var js_code = [ // array of code fragments, concatenated later
+        'function(input){',
+            'var mem_ptr = 0,',
+                'input_ptr = 0,',
+                'mem = [],',
+                'out = "";'
+    ];
+    
+    for(var i = 0, l = code.length; i < l; i++){
+        var op = code.charAt(i);
+        switch(op){
+            case '>':
+                js_code.push('mem_ptr++;');
+                break;
+            case '<':
+                js_code.push('mem_ptr--;');
+                break;
+            case '+':
+                js_code.push('mem[mem_ptr] = (mem[mem_ptr] || 0) + 1;');
+                break;
+            case '-':
+                js_code.push('mem[mem_ptr] = (mem[mem_ptr] || 0) - 1;');
+                break;
+            case '.':
+                js_code.push('out += String.fromCharCode(mem[mem_ptr] || 0);');
+                break;
+            case ',':
+                js_code.push('mem[mem_ptr] = input.charCodeAt(input_ptr) || 0;');
+                js_code.push('input_ptr++;');
+                break;
+            case '[':
+                js_code.push('while( mem[mem_ptr] ){');
+                break;
+            case ']':
+                js_code.push('}');
+                break;
+        }
+    }
+    js_code.push(
+            'if(mem_ptr < 0 || mem_ptr >= 30000){',
+                'throw new Error("These are not the memory cells you are looking for.");',
+            '}',
+            'return out;',
+        '};'
+    );
+    
+    return eval( 'brainfuck_function = ' + js_code.join(''));
+};
+</script>
