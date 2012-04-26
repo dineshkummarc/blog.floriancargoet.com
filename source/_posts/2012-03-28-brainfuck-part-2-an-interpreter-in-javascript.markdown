@@ -9,7 +9,7 @@ This article is part of a series on brainfuck, a weird programming language:
 
  1. [Brainfuck part 1: what is it?](/2012/03/brainfuck-part-1-what-is-it/)
  2. [Brainfuck part 2: an interpreter in JavaScript](/2012/03/brainfuck-part-2-an-interpreter-in-javascript/)
- 3. Brainfuck part 3: a brainfuck → JavaScript transpiler
+ 3. [Brainfuck part 3: a brainfuck → JavaScript transpiler](/2012/04/brainfuck-part-3-a-brainfuck-javascript-transpiler/)
 
 ---
 
@@ -304,7 +304,7 @@ This article is part of a series on brainfuck, a weird programming language:
 
  1. [Brainfuck part 1: what is it?](/2012/03/brainfuck-part-1-what-is-it/)
  2. [Brainfuck part 2: an interpreter in JavaScript](/2012/03/brainfuck-part-2-an-interpreter-in-javascript/)
- 3. Brainfuck part 3: a brainfuck → JavaScript transpiler
+ 3. [Brainfuck part 3: a brainfuck → JavaScript transpiler](/2012/04/brainfuck-part-3-a-brainfuck-javascript-transpiler/)
 
 <script>
 var bf = function(code, input){
