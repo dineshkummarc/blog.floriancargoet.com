@@ -3,7 +3,7 @@ layout: post
 title: "Brainfuck part 1: what is it?"
 date: 2012-03-17 15:23
 comments: true
-categories: programming
+categories: [Programming, Brainfuck]
 ---
 This article is part of a series on brainfuck, a weird programming language:
 

@@ -3,7 +3,7 @@ layout: post
 title: "Brainfuck part 3: a brainfuck → JavaScript transpiler"
 date: 2012-04-26 19:18
 comments: true
-categories: 
+categories: [Programming, Brainfuck]
 ---
 
 This article is part of a series on brainfuck, a weird programming language:

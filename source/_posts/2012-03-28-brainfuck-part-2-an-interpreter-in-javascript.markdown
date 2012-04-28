@@ -3,7 +3,7 @@ layout: post
 title: "Brainfuck part 2: an interpreter in JavaScript"
 date: 2012-03-28 22:19
 comments: true
-categories:
+categories: [Programming, Brainfuck]
 ---
 This article is part of a series on brainfuck, a weird programming language:
 

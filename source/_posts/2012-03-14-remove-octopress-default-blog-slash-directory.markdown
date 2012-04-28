@@ -3,7 +3,7 @@ layout: post
 title: "Remove Octopress' default blog/ directory"
 date: 2012-03-14 01:20
 comments: true
-categories: 
+categories: [Tips, Octopress]
 ---
 
 By default, Octopress deploys your posts, categories and archives to a `/blog/` subdirectory. Here is how to remove that :
