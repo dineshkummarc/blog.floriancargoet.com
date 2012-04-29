@@ -22,6 +22,8 @@ brainfuck → JavaScript [transpiler](http://en.wikipedia.org/wiki/Source-to-sou
 Instead of interpreting each brainfuck instruction, it will be converted
 into a JS function once and for all.
 
+<!--more-->
+
 Basics
 ------
 

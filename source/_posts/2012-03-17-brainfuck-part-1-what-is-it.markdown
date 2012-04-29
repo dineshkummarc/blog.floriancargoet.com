@@ -34,6 +34,8 @@ You can modify the value of this cell, print it (ASCII output) or replace it wit
  
 Having only these commands is the ''fuck'' part of brainfuck.
 
+<!--more-->
+
 Examples
 --------
 

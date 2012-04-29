@@ -17,6 +17,8 @@ Last week, I briefly explained what was brainfuck and gave some examples.
 It's time to execute those examples and we're gonna write the interpreter
 ourselves!
 
+<!--more-->
+
 Basics
 ------
 
