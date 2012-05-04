@@ -3,7 +3,7 @@ layout: post
 title: "Alphabet: 26 Languages"
 date: 2012-05-04 22:58
 comments: true
-categories: [Programming, Brainfuck, Lua]
+categories: [Programming, Brainfuck, Lua, "26 languages"]
 ---
 
 A few months ago, I started a project called [Alphabet](https://github.com/floriancargoet/Alphabet).
