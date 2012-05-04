@@ -1,0 +1,264 @@
+---
+layout: post
+title: "Alphabet: 26 Languages"
+date: 2012-05-04 22:58
+comments: true
+categories: [Programming, Brainfuck, Lua]
+---
+
+A few months ago, I started a project called [Alphabet](https://github.com/floriancargoet/Alphabet).
+26 letters in my alphabet, 26 languages to discover.
+
+<!-- more -->
+
+What
+----
+
+I intend to write a small (tiny) program in 26 different languages, 
+one for each letter of the latin alphabet.
+
+I'm not sure yet what the program has to do but each implementation will 
+probably have to do something with the first letter of its language.
+
+Why
+---
+
+ - I will discover crazy languages
+ - I will learn a lot about programming languages in general
+ - It's fun!
+
+Letters already done
+--------------------
+
+So far, only letters B and L are completed : 
+[Brainfuck](http://en.wikipedia.org/wiki/Brainfuck) and 
+[Lua](http://en.wikipedia.org/wiki/Lua_%28programming_language%29).
+
+### Brainfuck
+
+If you've read my 
+[brainfuck series](http://blog.floriancargoet.com/2012/03/brainfuck-part-1-what-is-it/),
+you've already seen the B entry.
+
+```
++++++++++++[->+++>++++++>+<<<]>->>->>>++>+>+>++>+>+>++<<<<<<
+[-[<+<+>>-]<<[>>+<<-]+>[[-]<[<]>>....>.[>]<->]<[[<]>>.<...>.>.[>]<-]+>>[-]>]
+```
+
+It prints a big B letter made of little B characters:
+
+<pre>
+BBBB
+B   B
+B   B
+BBBB
+B   B
+B   B
+BBBB
+</pre>
+
+Here is the commented code:
+
+```
+***************
+* Description *
+***************
+
+This program outputs:
+BBBB
+B   B
+B   B
+BBBB
+B   B
+B   B
+BBBB
+
+*************
+* Algorithm *
+*************
+
+It defines two kinds of lines: 
+BBBB    type 2
+and
+B   B   type 1
+
+It also defines a sequence of lines: 
+2112112
+corresponding to the final drawing
+
+********
+* Code *
+********
+prepare the letters
+space = 32
+B = 66
+\n = 10
++++++ +++++ +
+[-
+>+++
+>++++++
+>+
+<<<
+]
+>->>-
+
+
+leave some space for temporary variables T1 and T2
+>>
+define the drawing pattern
+>++>+>+>++>+>+>++
+<<<<<<
+
+
+main loop
+[-
+  [<+<+>>-]<<[>>+<<-]+  if/else preparation
+  
+  >[             if x
+    [-]            T2 = 0
+    <[<]>          rewind to letters
+    >....>.        print line of type 2
+    [>]            back to T2
+    <-             T1 = 0 marks the if block as done
+  >]             end if
+  <[             else
+    [<]>           rewind to letters
+    >.<...>.>.     print line of type 1
+    [>]<           back to T1
+  -]             end else
+  +>>[-]>        T1 = 1 (for correct rewinds) / T2 is new T1 / reset x (new T2) / then go to next line in the sequence
+]
+```
+
+### Lua
+
+The Lua code is a lot easier to read!
+
+I used a framework but it starts with a L ([Löve2D](http://love2d.org/))
+so I decided it was fine :-). It's a 2D game framework which I intend to
+write about later.
+
+This code just draws a spinning colored L. Rotation speed and color oscillate.
+
+{% img /images/2012-05-04-26-languages/Alphabet-L1.png %}
+
+You can change the letter by pressing another one.
+
+{% img /images/2012-05-04-26-languages/Alphabet-L2.png %}
+
+Löve2D calls `love.load()` once, then calls `love.update()` and `love.draw()`
+repeatedly until you exit the program. `love.keypressed/keyreleased()` are
+called when such an event occurs.
+
+``` lua
+-- Lua starts with a L
+-- Löve (2D framework) starts with an L
+--> double fun
+
+local angle = 0
+local omega = 0
+local mainFont
+local infoFont
+local hue
+local letter = 'L' -- default letter
+local infoText = 'If you don\'t like the L letter, press another one.'
+local sadDeveloper = false
+local sadText = 'I said a letter...'
+
+function love.load()
+    mainFont = love.graphics.newFont(250)
+    infoFont = love.graphics.newFont(12)
+end
+
+function love.update(dt)
+    local t = love.timer.getTime()
+    omega = math.sin(t) * math.pi * 3 -- speed oscillates between ± 3 pi rad/s
+    angle = angle + omega * dt
+    angle = angle % (2 * math.pi)
+    hue = 128 + 127*math.cos(t)
+end
+
+function love.draw()
+    local w = love.graphics.getWidth()
+    local h = love.graphics.getHeight()
+    
+    love.graphics.setFont(infoFont)
+    love.graphics.setColor(255, 255, 255)
+    local infoWidth = infoFont:getWidth(infoText)
+    love.graphics.print(infoText, (w - infoWidth)/2, 10)
+    
+    if sadDeveloper then
+        local sadWidth = infoFont:getWidth(sadText)
+        love.graphics.print(sadText, (w - sadWidth)/2, h - 20)
+    end
+    -- rotation
+    love.graphics.translate(w/2, h/2)
+    love.graphics.rotate(angle)
+    love.graphics.translate(-w/2, -h/2)
+    
+    love.graphics.setFont(mainFont)
+    love.graphics.setColor(HSL( hue , 255, 128))
+    local letterWidth = mainFont:getWidth(letter)
+    love.graphics.print(letter, (w - letterWidth)/2, (h - 250)/2)
+end
+
+function love.keypressed(k)
+    if k == 'escape' then
+        love.event.push('q') -- quit the game
+    end
+    
+    -- change the printed letter
+    k = k:upper()
+    if k:len() == 1 and k:byte() >= string.byte('A') and k:byte() <= string.byte('Z') then -- if it's a letter
+        letter = k
+    else
+        letter = ':-('
+        sadDeveloper = true
+    end
+end
+
+function love.keyreleased(k)
+    letter = 'L'
+    sadDeveloper = false
+end
+
+-- from Love's wiki
+function HSL(h, s, l, a)
+    if s<=0 then return l,l,l,a end
+    h, s, l = h/256*6, s/255, l/255
+    local c = (1-math.abs(2*l-1))*s
+    local x = (1-math.abs(h%2-1))*c
+    local m,r,g,b = (l-.5*c), 0,0,0
+    if h < 1 then r,g,b = c,x,0
+    elseif h < 2 then r,g,b = x,c,0
+    elseif h < 3 then r,g,b = 0,c,x
+    elseif h < 4 then r,g,b = 0,x,c
+    elseif h < 5 then r,g,b = x,0,c
+    else r,g,b = c,0,x
+    end return (r+m)*255,(g+m)*255,(b+m)*255,a
+end
+```
+
+Next
+----
+
+My goal is to write one program per letter. It's likely to take years.
+
+I have selected several candidates for the other letters. 
+Some are well-known languages, some are esoteric.
+
+ - __A__: [APL](http://en.wikipedia.org/wiki/APL_%28programming_language%29), [Ada](http://en.wikipedia.org/wiki/Ada_%28programming_language%29)
+ - __C__: [Clojure](http://en.wikipedia.org/wiki/Clojure), 
+ - __E__: [Erlang](http://en.wikipedia.org/wiki/Erlang_%28programming_language%29)
+ - __F__: [FALSE](http://en.wikipedia.org/wiki/FALSE)
+ - __G__: [Go](http://en.wikipedia.org/wiki/Go_%28programming_language%29), [Groovy](http://en.wikipedia.org/wiki/Groovy_%28programming_language%29)
+ - __H__: [Haskell](http://en.wikipedia.org/wiki/Haskell_%28programming_language%29)
+ - __I__: [Io](http://en.wikipedia.org/wiki/Io_%28programming_language%29)
+ - __P__: [Piet](http://en.wikipedia.org/wiki/Piet_%28programming_language%29), [PostScript](http://en.wikipedia.org/wiki/PostScript), [Prolog](http://en.wikipedia.org/wiki/Prolog)
+ - __R__: [Ruby](http://en.wikipedia.org/wiki/Ruby_%28programming_language%29)
+ - __S__: [Scala](http://en.wikipedia.org/wiki/Scala_%28programming_language%29), [Scheme](http://en.wikipedia.org/wiki/Scheme_%28programming_language%29), [Self](http://en.wikipedia.org/wiki/Self_%28programming_language%29)
+ - __T__: [Thue](http://en.wikipedia.org/wiki/Thue_%28programming_language%29)
+ - __V__: [Vala](http://en.wikipedia.org/wiki/Vala_%28programming_language%29)
+ - __X__: [XSLT](http://en.wikipedia.org/wiki/XSL_Transformations)
+
+2 down, 24 to go!
