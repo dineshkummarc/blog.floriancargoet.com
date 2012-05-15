@@ -8,7 +8,13 @@ ssh_user       = "user@domain.com"
 ssh_port       = "22"
 document_root  = "~/website.com/"
 rsync_delete   = true
-deploy_default = "rsync"
+#deploy_default = "rsync"
+
+## -- LFTP Deploy config -- ##
+ftp_user       = "floriancf"
+ftp_server     = "ftp.floriancargoet.com"
+ftp_target     = "/blog"
+deploy_default = "lftp"
 
 # This will be configured for you when you run config_deploy
 deploy_branch  = "gh-pages"
@@ -239,6 +245,13 @@ task :rsync do
   puts "## Deploying website via Rsync"
   ok_failed system("rsync -avze 'ssh -p #{ssh_port}' #{exclude} #{"--delete" unless rsync_delete == false} #{public_dir}/ #{ssh_user}:#{document_root}")
 end
+
+desc "Deploy website via LFTP"
+task :lftp do
+  puts "## Deploying website via LFTP"
+  ok_failed system("lftp -e 'mirror -R -v #{public_dir} #{ftp_target}; bye' -u #{ftp_user} #{ftp_server}")
+end
+
 
 desc "deploy public directory to github pages"
 multitask :push do
