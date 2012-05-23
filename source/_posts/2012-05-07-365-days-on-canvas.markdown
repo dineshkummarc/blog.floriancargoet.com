@@ -29,8 +29,8 @@ Probably interactive animated stuff.
 
 There is no goal. I will work on my canvas every day, twenty minutes a day.
 I'll post weekly updates, with the work of the seven previous days.
-At the end of the year, I'll build some app that will allow you to browse
-easily all these canvases and all this code.
+At some point, hopefully before the end of the year, I'll build some app
+that will allow you to browse easily all these canvases and all this code.
 
 I won't have 365 great ideas so I encourage you to tell me in the comments
 where you want this project to go. 
