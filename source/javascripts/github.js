@@ -1,9 +1,25 @@
 var github = (function(){
+
+  var htmlEncode = (function() {
+    var entities = {
+      '&' : '&amp;',
+      '>' : '&gt;',
+      '<' : '&lt;',
+      '"' : '&quot;'
+    };
+
+    return function(value) {
+      return value.replace(/[&<>"]/g, function(c) {
+        return entities[c];
+      });
+    };
+  })();
+
   function render(target, repos){
     var i = 0, fragment = '', t = $(target)[0];
 
     for(i = 0; i < repos.length; i++) {
-      fragment += '<li><a href="'+repos[i].url+'">'+repos[i].name+'</a><p>'+repos[i].description+'</p></li>';
+      fragment += '<li><a href="'+repos[i].url+'">'+htmlEncode(repos[i].name)+'</a><p>'+htmlEncode(repos[i].description)+'</p></li>';
     }
     t.innerHTML = fragment;
   }
