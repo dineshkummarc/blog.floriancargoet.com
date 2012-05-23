@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "365 days on canvas"
-date: 2012-05-17 9:58
+date: 2012-05-23 21:00
 comments: true
 categories: [Programming, "365 days on canvas", JavaScript, Canvas]
 ---
