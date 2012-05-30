@@ -93,7 +93,8 @@ disqus_short_name: blogfloriancargoetcom
 disqus_show_comment_count: true
 
 # Google Analytics
-google_analytics_tracking_id:
+google_analytics_tracking_id: UA-25499853-2
+google_analytics_domain: floriancargoet.com
 
 # Facebook Like
 facebook_like: false
