@@ -9,7 +9,9 @@ categories: [Programming, "365 days on canvas", JavaScript, Canvas]
 **365 days on canvas**, is a project where I spent 20 minutes every day
 on the `<canvas>` tag. More about it [here](/2012/05/365-days-on-canvas/).
 
-- - -
+Here is the work of the last 7 days.
+
+<!-- more -->
 
 <script type="text/javascript" src="/projects/365-days-on-canvas/js/loader.js"></script>
 
