@@ -49,7 +49,7 @@ I also promised a shark last week.
 
 The fin is made of two `arcTo()` and a `closePath()`.
 Movement is an ellipse ( 5&nbsp;cos&alpha;&nbsp;x, 3&nbsp;sin&alpha;&nbsp;y),
-fin oriention is based on the sign of cos&alpha;.
+fin orientation is based on the sign of cos&alpha;.
 
 <canvas id="day10" width="500" height="500"></canvas>
 
