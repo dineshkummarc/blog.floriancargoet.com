@@ -42,11 +42,16 @@ window.onload = function(){
     var tags = document.querySelectorAll('div.entry-content canvas');
     Array.prototype.slice.call(tags).forEach(function(el){
         var id = el.id.substring(3);
-        el.addEventListener('click', Canvas365.startStop, false);
+        var btn = document.querySelector('#btn' + id);
+        if(btn){
+            btn.addEventListener('click', Canvas365.startStop, false);
+        } else {
+            el.addEventListener('click', Canvas365.startStop, false);
+        }
         Canvas365.contexts[id] = el.getContext('2d');
         Canvas365.loadDay(id);
     });
-    
+
     Canvas365.loop();
 };
 
@@ -59,4 +64,4 @@ window.requestAnimFrame = (function(){
             function( callback ){
                 window.setTimeout(callback, 1000 / 60);
             };
-})(); 
+})();
